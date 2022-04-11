@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ETicaret.Models.Kategoriler>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2 style="color:darkred">Kategoriler</h2>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <p>
+            <a href="/Kategoriler/Create" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span> <b>Yeni</b>
+            </a>
+        </p>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.KategoriAdi)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KategoriAdi)
+            </td>
+            <td>
+                <a href="/Kategoriler/Edit/@item.KategoriId" class="btn btn-warning btn-xs" title="Düzenle">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+                <a href="/Kategoriler/Details/@item.KategoriId" class="btn btn-info btn-xs" title="Detay">
+                    <span class="glyphicon glyphicon-search"></span>
+                </a>
+                <a href="/Kategoriler/Delete/@item.KategoriId" class="btn btn-danger btn-xs" title="Sil">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>
+            @*<td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.KategoriId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.KategoriId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.KategoriId })
+            </td>*@
+        </tr>
+            }
+
+        </table>
+
+
+    </div>
+</div>
+
+
