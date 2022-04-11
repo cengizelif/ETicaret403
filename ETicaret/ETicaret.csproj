@@ -173,6 +173,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KategorilerController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UrunlerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -308,6 +309,11 @@
     <Content Include="Views\Kategoriler\Details.cshtml" />
     <Content Include="Views\Kategoriler\Edit.cshtml" />
     <Content Include="Views\Kategoriler\Index.cshtml" />
+    <Content Include="Views\Urunler\Create.cshtml" />
+    <Content Include="Views\Urunler\Delete.cshtml" />
+    <Content Include="Views\Urunler\Details.cshtml" />
+    <Content Include="Views\Urunler\Edit.cshtml" />
+    <Content Include="Views\Urunler\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
