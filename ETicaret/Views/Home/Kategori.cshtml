@@ -1,0 +1,42 @@
+﻿@using ETicaret.Models
+@model List<Urunler>
+@{
+    Kategoriler kat = ((Kategoriler)ViewBag.Kategori);
+    List<Kategoriler> kategoriler = (List<Kategoriler>)ViewBag.KategoriListesi;
+    ViewBag.Title =kat.KategoriAdi;
+}
+
+<div class="jumbotron">
+    <h1> @kat.KategoriAdi</h1> 
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Kategoriler</h2>
+        <ul>
+            @foreach (var item in kategoriler)
+            {
+                <li>@Html.ActionLink(item.KategoriAdi, "Kategori", new { id = item.KategoriId })</li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <h2>Ürünler</h2>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6" style="border:1px solid #000000">
+                    <h5>@item.UrunAdi</h5>
+                    <img src="~/Resim/@(item.UrunId).jpg" style="max-width:20%" />
+                    <p>
+                        <a class="btn btn-default" href="@Url.Action("Urun","Home",
+                               new {id=item.UrunId })">Ürün Detayı</a>
+                        <span style="color:red;font-weight:bold;float:right;">@item.UrunFiyati</span>
+                    </p>
+                </div>
+            }
+
+        </div>
+
+    </div>
+</div>

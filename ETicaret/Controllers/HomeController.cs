@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ETicaret.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,22 +9,24 @@ namespace ETicaret.Controllers
 {
     public class HomeController : Controller
     {
+        private ETicaretEntities db = new ETicaretEntities();
         public ActionResult Index()
         {
+            ViewBag.KategoriListesi = db.Kategoriler.ToList();
+            ViewBag.SonUrunler = db.Urunler.OrderByDescending(x => x.UrunId).Take(10).ToList();
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Kategori(int id)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            ViewBag.KategoriListesi = db.Kategoriler.ToList();
+            ViewBag.Kategori = db.Kategoriler.Find(id);
+            return View(db.Urunler.Where(x=>x.KategoriId==id).ToList());
         }
 
-        public ActionResult Contact()
+        public ActionResult Urun()
         {
-            ViewBag.Message = "Your contact page.";
-
+       
             return View();
         }
     }
