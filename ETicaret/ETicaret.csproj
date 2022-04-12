@@ -173,6 +173,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KategorilerController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SepetController.cs" />
+    <Compile Include="Controllers\SiparisController.cs" />
     <Compile Include="Controllers\UrunlerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -313,10 +315,13 @@
     <Content Include="Views\Urunler\Edit.cshtml" />
     <Content Include="Views\Urunler\Index.cshtml" />
     <Content Include="Views\Home\Kategori.cshtml" />
+    <Content Include="Views\Home\Urun.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Resim\" />
+    <Folder Include="Views\Sepet\" />
+    <Folder Include="Views\Siparis\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

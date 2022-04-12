@@ -1,0 +1,41 @@
+﻿@using ETicaret.Models
+@model Urunler
+@{
+    ViewBag.Title = Model.UrunAdi;
+    List<Kategoriler> kategoriler = (List<Kategoriler>)ViewBag.KategoriListesi;
+}
+
+<div class="jumbotron">
+    <h1> @Model.UrunAdi</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Kategoriler</h2>
+        <ul>
+            @foreach (var item in kategoriler)
+            {
+                <li>@Html.ActionLink(item.KategoriAdi, "Kategori", new { id = item.KategoriId })</li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <h2>Ürün adı:</h2><h4>@Model.UrunAdi</h4>
+        <div class="row">         
+            <div class="col-md-6">                   
+              <img src="~/Resim/@(Model.UrunId).jpg" style="max-width:20%" />                  
+            </div>
+            <div class="col-md-6">
+                Ürün Fiyatı:<span style="color:red;font-weight:bold;">&nbsp;@Model.UrunFiyati TL</span>
+                <form action="/Sepet/SepeteEkle">
+                    <input type="hidden" name="id" id="id" value="@Model.UrunId" />
+                    <input type="number" name="adet" id="adet" value="1" style="width:50px;" />
+                    <input type="submit" name="gonder" id="gonder" value="Sepete Ekle" />
+                </form>
+            </div>    
+        </div>
+        <h2>Ürün Açıklaması</h2>
+        <p>@Model.UrunAciklamasi</p>
+    </div>
+</div>
+

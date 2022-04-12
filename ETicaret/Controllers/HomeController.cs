@@ -24,10 +24,11 @@ namespace ETicaret.Controllers
             return View(db.Urunler.Where(x=>x.KategoriId==id).ToList());
         }
 
-        public ActionResult Urun()
+        public ActionResult Urun(int id)
         {
-       
-            return View();
+            ViewBag.KategoriListesi = db.Kategoriler.ToList();
+        
+            return View(db.Urunler.Find(id));
         }
     }
 }
