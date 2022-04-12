@@ -4,13 +4,10 @@
     ViewBag.Title = "Delete";
 }
 
-<div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        <h2 style="color:darkred">Kategori Sil</h2>
-        <h3>Silmek istediğinize emin misiniz?</h3>
-    </div>
+<div class="jumbotron">
+    <h2 style="color:darkred">Kategori Sil</h2>
 </div>
-
+<h3>Silmek istediğinize emin misiniz?</h3>
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <hr />
@@ -29,13 +26,13 @@
         {
             @Html.AntiForgeryToken()
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Delete" class="btn btn-default" />
-        @*@Html.ActionLink("Back to List", "Index")*@
-        <a href="/Kategoriler/Index" class="btn btn-default">
-            <span class="glyphicon glyphicon-arrow-left"></span> Listele
-        </a>
-    </div>
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" />
+
+                <a href="/Kategoriler/Index" class="btn btn-default">
+                    <span class="glyphicon glyphicon-arrow-left"></span> Listeye Dön
+                </a>
+            </div>
         }
     </div>
 </div>

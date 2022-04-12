@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -42,16 +43,21 @@ namespace ETicaret.Controllers
             ViewBag.KategoriId = new SelectList(db.Kategoriler, "KategoriId", "KategoriAdi");
             return View();
         }
-
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UrunId,UrunAdi,UrunAciklamasi,UrunFiyati,KategoriId")] Urunler urunler)
+        public ActionResult Create([Bind(Include = "UrunId,UrunAdi,UrunAciklamasi,UrunFiyati,KategoriId")] Urunler urunler,HttpPostedFileBase UrunResmi)
         {
             if (ModelState.IsValid)
             {
                 db.Urunler.Add(urunler);
                 db.SaveChanges();
+                if(UrunResmi!=null)
+                {
+                    string filepath = Path.Combine(Server.MapPath("~/Resim"), urunler.UrunId + ".jpg");
+                    UrunResmi.SaveAs(filepath);
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -78,12 +84,17 @@ namespace ETicaret.Controllers
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UrunId,UrunAdi,UrunAciklamasi,UrunFiyati,KategoriId")] Urunler urunler)
+        public ActionResult Edit([Bind(Include = "UrunId,UrunAdi,UrunAciklamasi,UrunFiyati,KategoriId")] Urunler urunler, HttpPostedFileBase UrunResmi)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(urunler).State = EntityState.Modified;
                 db.SaveChanges();
+                if (UrunResmi != null)
+                {
+                    string filepath = Path.Combine(Server.MapPath("~/Resim"), urunler.UrunId + ".jpg");
+                    UrunResmi.SaveAs(filepath);
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.KategoriId = new SelectList(db.Kategoriler, "KategoriId", "KategoriAdi", urunler.KategoriId);
@@ -113,6 +124,14 @@ namespace ETicaret.Controllers
             Urunler urunler = db.Urunler.Find(id);
             db.Urunler.Remove(urunler);
             db.SaveChanges();
+
+            string filepath = Path.Combine(Server.MapPath("~/Resim"), urunler.UrunId + ".jpg");
+
+            FileInfo fi = new FileInfo(filepath);
+
+            if (fi.Exists)
+              fi.Delete();
+
             return RedirectToAction("Index");
         }
 
