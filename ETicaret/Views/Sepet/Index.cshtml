@@ -1,0 +1,47 @@
+﻿@using ETicaret.Models
+@model IEnumerable<Sepet>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="jumbotron">
+    <h1>Sepet Bölümü</h1>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Urunler.UrunAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToplamTutar)
+        </th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+     <tr>
+       <td>
+        @Html.DisplayFor(m => item.Urunler.UrunAdi )
+       </td>
+       <td>
+           <form action="/Sepet/SepetGuncelle">
+             <input type="hidden" name="id" id="id" value="@item.SepetId"/>
+             <input type="number" name="adet" id="adet" value="@item.Adet" style="width:50px;"/>
+             <input type="submit" id="gonder" value="Güncelle" />
+           </form>
+       </td>
+       <td>
+           @Html.DisplayFor(m => item.ToplamTutar) TL
+       </td>
+       <td>
+           @Html.ActionLink("Sil", "Sil", new {id=item.SepetId })
+       </td>
+
+     </tr>
+    }
+    
+</table>
+
