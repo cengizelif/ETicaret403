@@ -42,6 +42,18 @@
 
      </tr>
     }
-    
+    <tr>
+        <th>Toplam</th>
+        <th>@Model.Sum(x=>x.Adet)</th>
+        <th>@Model.Sum(x=>x.ToplamTutar) TL</th>
+    </tr>
+    <tr>
+        <td>
+           <a href="@Url.Action("Index","Home")" class="btn btn-default">Alışverişe Devam Et</a>
+        </td>
+        <td colspan="3" style="text-align:right;">
+            <a href="@Url.Action("SiparisTamamla","Siparis")" class="btn btn-default">Alışverişi Tamamla</a>
+        </td>
+    </tr>
 </table>
 

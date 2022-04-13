@@ -317,11 +317,12 @@
     <Content Include="Views\Home\Kategori.cshtml" />
     <Content Include="Views\Home\Urun.cshtml" />
     <Content Include="Views\Sepet\Index.cshtml" />
+    <Content Include="Views\Siparis\Index.cshtml" />
+    <Content Include="Views\Siparis\SiparisDetay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Resim\" />
-    <Folder Include="Views\Siparis\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
