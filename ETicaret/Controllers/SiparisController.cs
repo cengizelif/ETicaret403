@@ -64,7 +64,7 @@ List<Sepet> sepetUrunleri=db.Sepet.Where(x => x.UserId == userID).ToList();
             ViewBag.PostURL = "https://entegrasyon.asseco-see.com.tr/fim/est3Dgate";
 
 
-            return View()
+            return View();
 
         }
 
