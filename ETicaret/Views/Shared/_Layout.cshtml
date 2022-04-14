@@ -23,8 +23,8 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Sepet", "Index", "Sepet")</li>
                     <li>@Html.ActionLink("Siparişlerim", "Index", "Siparis")</li>
-                    <li>@Html.ActionLink("Kategoriler", "Index", "Kategoriler")</li>
-                    <li>@Html.ActionLink("Ürünler", "Index", "Urunler")</li>
+                    <li>@Html.ActionLink("Kategoriler", "Index", "Kategoriler",null, new { style = "display:" + ViewBag.display })</li>
+                    <li>@Html.ActionLink("Ürünler", "Index", "Urunler",null, new { style = "display:" + ViewBag.display })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

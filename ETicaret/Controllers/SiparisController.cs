@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ETicaret.Controllers
 {
+    [Authorize]
     public class SiparisController : Controller
     {
         private ETicaretEntities db = new ETicaretEntities();
@@ -55,7 +56,7 @@ List<Sepet> sepetUrunleri=db.Sepet.Where(x => x.UserId == userID).ToList();
             ViewBag.RDN = RDN;
             ViewBag.Hash = Hash;
             ViewBag.Amount = ToplamTutar;
-            ViewBag.StoreType = "3d_pay_hosting"; // Ödeme modelimiz biz buna göre anlatıyoruz 
+            ViewBag.StoreType = "3d_pay_hosting"; // Ödeme modelimiz
             ViewBag.Description = "";
             ViewBag.XID = "";
             ViewBag.Lang = "tr";
@@ -63,10 +64,44 @@ List<Sepet> sepetUrunleri=db.Sepet.Where(x => x.UserId == userID).ToList();
             ViewBag.UserID = "ElifCengiz"; // bu id yi bankanın sanala pos ekranında biz oluşturuyoruz.
             ViewBag.PostURL = "https://entegrasyon.asseco-see.com.tr/fim/est3Dgate";
 
-
             return View();
-
         }
 
+        public ActionResult Tamamlandi()
+        {
+            string userID = User.Identity.GetUserId();
+            Siparis siparis = new Siparis()
+            {
+                Ad = Request.Form.Get("Ad"),
+                Soyad = Request.Form.Get("Soyad"),
+                Adres = Request.Form.Get("Adres"),
+                Tarih = DateTime.Now,
+                TCKimlikNo = Request.Form.Get("TCKimlikNo"),
+                Telefon = Request.Form.Get("Telefon"),
+                UserId = userID
+            };
+            IEnumerable<Sepet> sepettekiUrunler = db.Sepet.Where(a => a.UserId == userID).ToList();
+
+            foreach (Sepet sepetUrunu in sepettekiUrunler)
+            {
+                SiparisDetay yeniKalem = new SiparisDetay()
+                {
+                    Adet = sepetUrunu.Adet,
+                    ToplamTutar = sepetUrunu.ToplamTutar,
+                    UrunId = sepetUrunu.UrunId
+                };
+                siparis.SiparisDetay.Add(yeniKalem);
+                db.Sepet.Remove(sepetUrunu);
+            }
+            db.Siparis.Add(siparis);
+            db.SaveChanges();
+
+            return View();
+        }
+        public ActionResult Hatali()
+        {
+           ViewBag.Hata = Request.Form;
+            return View();
+        }
     }
 }

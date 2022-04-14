@@ -8,20 +8,51 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ETicaret.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ETicaret.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UrunlerController : Controller
     {
         private ETicaretEntities db = new ETicaretEntities();
-
-        // GET: Urunler
+        public Boolean isAdminUser()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                ApplicationDbContext context = new ApplicationDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var s = UserManager.GetRoles(user.GetUserId());
+                if (s[0].ToString() == "Admin")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+        public void menuAyar()
+        {
+            if (isAdminUser())
+            {
+                ViewBag.display = "block";
+            }
+            else
+            {
+                ViewBag.display = "None";
+            }
+        }
         public ActionResult Index()
         {
+            menuAyar();
             var urunler = db.Urunler.Include(u => u.Kategoriler);
             return View(urunler.ToList());
         }
-
         // GET: Urunler/Details/5
         public ActionResult Details(int? id)
         {

@@ -320,6 +320,7 @@
     <Content Include="Views\Siparis\Index.cshtml" />
     <Content Include="Views\Siparis\SiparisDetay.cshtml" />
     <Content Include="Views\Siparis\SiparisTamamla.cshtml" />
+    <Content Include="Views\Siparis\Tamamlandi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

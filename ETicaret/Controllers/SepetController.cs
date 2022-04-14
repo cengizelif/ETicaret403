@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace ETicaret.Controllers
 {
+    [Authorize]
     public class SepetController : Controller
     {
         private ETicaretEntities db = new ETicaretEntities();

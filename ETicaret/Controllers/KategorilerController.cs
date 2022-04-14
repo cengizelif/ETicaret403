@@ -10,6 +10,7 @@ using ETicaret.Models;
 
 namespace ETicaret.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class KategorilerController : Controller
     {
         private ETicaretEntities db = new ETicaretEntities();
