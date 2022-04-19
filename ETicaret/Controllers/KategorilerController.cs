@@ -104,6 +104,7 @@ namespace ETicaret.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+         
             Kategoriler kategoriler = db.Kategoriler.Find(id);
             db.Kategoriler.Remove(kategoriler);
             db.SaveChanges();
